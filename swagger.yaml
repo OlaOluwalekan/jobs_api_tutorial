@@ -1,0 +1,239 @@
+openapi: 3.0.0
+info:
+  title: Jobs-API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://jobsapitutorial-production.up.railway.app/api/v1
+    variables: {}
+paths:
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: CREATE_JOB
+      operationId: CREATE_JOB
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CREATE_JOB_REQUEST'
+                - example:
+                    company: facebook
+                    position: backend
+            example:
+              company: facebook
+              position: backend
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Jobs
+      summary: GET_ALL_JOBS
+      operationId: GET_ALL_JOBS
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+        - Jobs
+      summary: GET_SINGLE-JOB
+      operationId: GET_SINGLE-JOB
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    patch:
+      tags:
+        - Jobs
+      summary: UPDATE_JOB
+      operationId: UPDATE_JOB
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UPDATE_JOB_REQUEST'
+                - example:
+                    company: random
+                    position: full stack
+            example:
+              company: random
+              position: full stack
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Jobs
+      summary: DELETE_JOB
+      operationId: DELETE_JOB
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: REGISTER_USER
+      operationId: REGISTER_USER
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/REGISTER_USER_REQUEST'
+                - example:
+                    name: candid
+                    email: candid@outlook.com
+                    password: secret
+            example:
+              name: candid
+              email: candid@outlook.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: LOGIN_USER
+      operationId: LOGIN_USER
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/LOGIN_USER_REQUEST'
+                - example:
+                    email: hassan@outlook.com
+                    password: secret
+            example:
+              email: hassan@outlook.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    REGISTER_USER_REQUEST:
+      title: REGISTER_USER_REQUEST
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: candid
+        email: candid@outlook.com
+        password: secret
+    LOGIN_USER_REQUEST:
+      title: LOGIN_USER_REQUEST
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: hassan@outlook.com
+        password: secret
+    CREATE_JOB_REQUEST:
+      title: CREATE_JOB_REQUEST
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: facebook
+        position: backend
+    UPDATE_JOB_REQUEST:
+      title: UPDATE_JOB_REQUEST
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: random
+        position: full stack
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Jobs
+  - name: Auth
+    description: ''
